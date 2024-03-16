@@ -20,7 +20,7 @@ public class QuestionController {
     }
 
     @PostMapping("/delete")
-    public Result deleteQuestion(@RequestBody int id){
+    public Result deleteQuestion(@RequestParam int id){
         return questionService.deleteQuestion(id);
     }
 
@@ -33,4 +33,10 @@ public class QuestionController {
     public Result getQuestionsBySurveyId(@RequestParam int surveyId){
         return questionService.findAllBySurveyId(surveyId);
     }
+
+    @PostMapping("/update")
+    public Result updateQuestion(@RequestBody RequestQuestionDto requestQuestionDto){
+        return questionService.updateQuestion(requestQuestionDto);
+    }
+
 }

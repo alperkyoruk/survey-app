@@ -17,4 +17,6 @@ public interface RatingService {
 
     Result addRatingList(List<RequestRatingDto> requestRatingDtos);
 
+    DataResult<Double> getAverageRatingByQuestionId(int questionId);
+
 }

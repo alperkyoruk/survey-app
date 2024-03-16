@@ -26,7 +26,7 @@ public class Question {
     private String content;
 
     @JsonIgnore
-    @ManyToOne(targetEntity = Survey.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Survey.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name ="survey_id")
     private Survey survey;
 

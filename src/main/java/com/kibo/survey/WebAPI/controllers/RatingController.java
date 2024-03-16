@@ -31,4 +31,9 @@ public class RatingController {
         return ratingService.addRatingList(requestRatingDtos);
     }
 
+    @GetMapping("/getAverageRatingByQuestionId")
+    public Result getAverageRatingByQuestionId(@RequestParam int questionId){
+        return ratingService.getAverageRatingByQuestionId(questionId);
+    }
+
 }

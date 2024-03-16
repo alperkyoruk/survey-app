@@ -11,6 +11,7 @@ public interface QuestionService {
     DataResult<Question> findById(int id);
     Result addQuestion(RequestQuestionDto requestQuestionDto);
     Result deleteQuestion(int questionId);
+    Result updateQuestion(RequestQuestionDto requestQuestionDto);
 
     DataResult<List<Question>> findAllBySurveyId(int surveyId);
 

@@ -15,6 +15,7 @@ import java.util.List;
 @Service
 public class QuestionManager implements QuestionService {
 
+
     @Autowired
     private QuestionDao questionDao;
 
@@ -80,4 +81,17 @@ public class QuestionManager implements QuestionService {
         questionDao.delete(question);
         return null;
     }
+
+    @Override
+    public Result updateQuestion(RequestQuestionDto requestQuestionDto) {
+        var question = questionDao.findById(requestQuestionDto.getSurveyId());
+        if(question == null){
+            return new ErrorResult(QuestionMessages.questionDoesntExist);
+        }
+
+        question.setContent(requestQuestionDto.getContent());
+        questionDao.save(question);
+        return null;
+    }
+
 }
