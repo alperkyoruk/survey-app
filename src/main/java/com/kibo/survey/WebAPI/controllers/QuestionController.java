@@ -1,0 +1,36 @@
+package com.kibo.survey.WebAPI.controllers;
+
+import com.kibo.survey.business.abstracts.QuestionService;
+import com.kibo.survey.core.utilities.result.Result;
+import com.kibo.survey.entities.dtos.RequestQuestionDto;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/questions")
+public class QuestionController {
+    private QuestionService questionService;
+
+    public QuestionController(QuestionService questionService){
+        this.questionService = questionService;
+    }
+
+    @PostMapping("/add")
+    public Result addQuestion(@RequestBody RequestQuestionDto requestQuestionDto){
+        return questionService.addQuestion(requestQuestionDto);
+    }
+
+    @PostMapping("/delete")
+    public Result deleteQuestion(@RequestBody int id){
+        return questionService.deleteQuestion(id);
+    }
+
+    @GetMapping("/getQuestionById")
+    public Result getQuestionById(@RequestParam int id){
+        return questionService.findById(id);
+    }
+
+    @GetMapping("/getQuestionsBySurveyId")
+    public Result getQuestionsBySurveyId(@RequestParam int surveyId){
+        return questionService.findAllBySurveyId(surveyId);
+    }
+}
