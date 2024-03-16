@@ -77,21 +77,11 @@ public class RatingManager implements RatingService {
 
         return new SuccessResult(RatingMessages.ratingAddSuccess);
     }
-    public DataResult<Double> getAverageRatingByQuestionId(int questionId) {
-        List<Rating> ratings = ratingDao.findAllByQuestionId(questionId);
 
-        // Calculate the sum of all ratings
-        int sum = ratings.stream()
-                .mapToInt(Rating::getRating)
-                .sum();
+    public DataResult<Float> getAverageRatingByQuestionId(int questionId) {
+       var result = ratingDao.getAvgRatingOfQuestion(questionId);
 
-        // Calculate the total count of ratings
-        int count = ratings.size();
-
-        // Calculate the average rating (rounded to one decimal place)
-        double averageRating = (double) sum / count;
-
-        return new SuccessDataResult<>(averageRating);
+       return new SuccessDataResult<Float>(result, RatingMessages.getAverageRatingByQuestionIdSuccess);
 
     }
 
