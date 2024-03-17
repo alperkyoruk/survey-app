@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 public class SurveyManager implements SurveyService {
 
+
     @Autowired
     private SurveyDao surveyDao;
 
@@ -110,4 +111,15 @@ public class SurveyManager implements SurveyService {
         secureRandom.nextBytes(randomBytes);
         return Base64.getUrlEncoder().encodeToString(randomBytes);
     }
+
+    @Override
+    public DataResult<Survey> getSurveyByLink(String surveyLink) {
+        var result = surveyDao.findBySurveyLink(surveyLink);
+        if(result == null){
+            return new ErrorDataResult<>(SurveyMessages.surveyDoesntExist);
+        }
+
+        return new SuccessDataResult<>(result, SurveyMessages.getSurveyBySurveyLinkSuccess);
+    }
+
 }

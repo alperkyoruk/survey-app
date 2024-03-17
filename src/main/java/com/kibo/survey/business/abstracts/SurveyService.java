@@ -14,4 +14,6 @@ public interface SurveyService{
     DataResult<List<Survey>>getActiveSurvey();
     DataResult<List<Survey>> getSurveys();
 
+    DataResult<Survey> getSurveyByLink(String surveyLink);
+
 }

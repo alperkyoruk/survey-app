@@ -15,4 +15,5 @@ public class SurveyMessages {
     public static String getSurveysEmpty = "There is no survey";
     public static String getSurveysSuccess = "Surveys has been found";
     public static String getSurveyByIdSuccess = "Survey has been found";
+    public static String getSurveyBySurveyLinkSuccess = "Survey has been found";
 }

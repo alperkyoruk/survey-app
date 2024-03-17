@@ -10,4 +10,6 @@ public interface SurveyDao extends JpaRepository<Survey, Integer>{
     Survey findByIsActive(boolean isActive);
 
     List<Survey> findAllByIsActive(boolean isActive);
+
+    Survey findBySurveyLink(String surveyLink);
 }

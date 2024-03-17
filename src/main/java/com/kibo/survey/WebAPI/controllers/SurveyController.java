@@ -3,7 +3,6 @@ package com.kibo.survey.WebAPI.controllers;
 import com.kibo.survey.business.abstracts.SurveyService;
 import com.kibo.survey.core.utilities.result.Result;
 import com.kibo.survey.entities.Survey;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -45,6 +44,12 @@ public class SurveyController {
     @GetMapping("/getActiveSurveys")
     public Result getActiveSurvey(){
         return surveyService.getActiveSurvey();
+    }
+
+
+    @GetMapping("/getSurveyByLink")
+    public Result getSurveyByLink(@RequestParam String surveyLink){
+        return surveyService.getSurveyByLink(surveyLink);
     }
 
 }

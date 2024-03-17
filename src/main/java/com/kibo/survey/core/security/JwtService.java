@@ -73,7 +73,7 @@ public class JwtService {
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+ 1000 * 60 * 15)) //token 15 dakika boyunca gecerli
+                .setExpiration(new Date(System.currentTimeMillis()+ 1000 * 60 * 60 * 12)) //token 12 saat boyunca gecerli
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
 

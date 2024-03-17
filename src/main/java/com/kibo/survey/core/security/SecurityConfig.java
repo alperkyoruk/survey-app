@@ -37,7 +37,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x ->
                         x
-                                .requestMatchers("/api/**").permitAll()
+                                .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/surveys/getSurveyByLink").permitAll()
+                                .requestMatchers("api/ratings/addRatingList").permitAll()
+                                .requestMatchers("/api/ratings/add").permitAll()
 
                                 .anyRequest().authenticated()
 
