@@ -8,6 +8,8 @@ import com.kibo.survey.entities.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class SurveyManager implements SurveyService {
         }
 
 
+        survey.setSurveyLink(generateSurveyLink());
         survey.setActive(true);
         survey.setCreatedAt(new Date());
 
@@ -99,5 +102,12 @@ public class SurveyManager implements SurveyService {
         }
 
         return new SuccessDataResult<>(result, SurveyMessages.getSurveysSuccess);
+    }
+
+    private String generateSurveyLink() {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] randomBytes = new byte[32];
+        secureRandom.nextBytes(randomBytes);
+        return Base64.getUrlEncoder().encodeToString(randomBytes);
     }
 }

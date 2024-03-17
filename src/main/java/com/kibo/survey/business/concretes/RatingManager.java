@@ -11,6 +11,7 @@ import com.kibo.survey.entities.dtos.RequestRatingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,6 +52,7 @@ public class RatingManager implements RatingService {
         var rating = Rating.builder()
                 .rating(requestRatingDto.getRating())
                 .question(questionResponse.getData())
+                .submittedAt(new Date())
                 .build();
 
         ratingDao.save(rating);

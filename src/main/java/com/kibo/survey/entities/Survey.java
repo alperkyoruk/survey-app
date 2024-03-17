@@ -33,6 +33,9 @@ public class Survey {
     @Column(name = "is_active")
     private boolean isActive;
 
+    @Column(name = "survey_link")
+    private String surveyLink;
+
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "survey", cascade = CascadeType.ALL)
     private List<Question> questions;

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -21,6 +23,9 @@ public class Rating {
 
     @Column(name = "rating")
     private int rating;
+
+    @Column(name = "submitted_at")
+    private Date submittedAt;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
