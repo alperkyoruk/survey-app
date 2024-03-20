@@ -4,22 +4,27 @@ import com.kibo.survey.business.abstracts.SurveyService;
 import com.kibo.survey.business.constants.SurveyMessages;
 import com.kibo.survey.core.utilities.result.*;
 import com.kibo.survey.dataAccess.SurveyDao;
+import com.kibo.survey.entities.Question;
 import com.kibo.survey.entities.Survey;
+import com.kibo.survey.entities.dtos.RequestQuestionDto;
+import com.kibo.survey.entities.dtos.RequestSurveyDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SurveyManager implements SurveyService {
 
 
-    @Autowired
     private SurveyDao surveyDao;
 
+    @Autowired
     public SurveyManager(SurveyDao surveyDao) {
         this.surveyDao = surveyDao;
 
@@ -97,7 +102,7 @@ public class SurveyManager implements SurveyService {
 
     @Override
     public DataResult<List<Survey>> getSurveys() {
-        var result = surveyDao.findAll();
+        var result = surveyDao.findAllOrderById();
         if(result.isEmpty()){
             return new ErrorDataResult<>(SurveyMessages.getSurveysEmpty);
         }
@@ -114,12 +119,63 @@ public class SurveyManager implements SurveyService {
 
     @Override
     public DataResult<Survey> getSurveyByLink(String surveyLink) {
-        var result = surveyDao.findBySurveyLink(surveyLink);
+        var result = surveyDao.findBySurveyLinkOrderByCreatedAt(surveyLink);
         if(result == null){
             return new ErrorDataResult<>(SurveyMessages.surveyDoesntExist);
         }
 
+        List<Question> sortedQuestions = result.getQuestions().stream()
+                .sorted(Comparator.comparingInt(Question::getQuestionOrder))
+                .collect(Collectors.toList());
+
+        result.setQuestions(sortedQuestions);
+
+
         return new SuccessDataResult<>(result, SurveyMessages.getSurveyBySurveyLinkSuccess);
+    }
+
+    @Override
+    public Result changeSurveyName(int id, String newName) {
+        var result = getSurveyById(id);
+        if(!result.isSuccess()){
+            return new ErrorResult(result.getMessage());
+        }
+
+        var survey = result.getData();
+        survey.setName(newName);
+        surveyDao.save(survey);
+
+        return new SuccessResult(SurveyMessages.changeSurveyNameSuccess);
+    }
+
+    @Override
+    public DataResult<RequestSurveyDto> getSurveyQuestionsByLink(String surveyLink) {
+var result = getSurveyByLink(surveyLink);
+        if(!result.isSuccess()){
+            return new ErrorDataResult<>(result.getMessage());
+        }
+
+        var survey = result.getData();
+
+        var requestQuestionDtoList = survey.getQuestions().stream().map(question -> {
+            return RequestQuestionDto.builder()
+                    .surveyId(survey.getId())
+                    .content(question.getContent())
+                    .id(question.getId())
+                    .build();
+        }).toList();
+
+        var requestSurveyDto = RequestSurveyDto.builder()
+                .surveyName(survey.getName())
+                .questions(requestQuestionDtoList)
+                .surveyLink(survey.getSurveyLink())
+                .isActive(survey.isActive())
+                .createdAt(survey.getCreatedAt())
+                .finishDate(survey.getFinishDate())
+                .build();
+
+
+        return new SuccessDataResult<>(requestSurveyDto, SurveyMessages.getSurveyQuestionsByLinkSuccess);
     }
 
 }

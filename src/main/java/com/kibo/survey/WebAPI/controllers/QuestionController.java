@@ -39,4 +39,9 @@ public class QuestionController {
         return questionService.updateQuestion(requestQuestionDto);
     }
 
+    @PostMapping("/changeQuestionName")
+    public Result changeQuestionName(@RequestParam int questionId, @RequestParam String newName){
+        return questionService.changeQuestionName(questionId, newName);
+    }
+
 }

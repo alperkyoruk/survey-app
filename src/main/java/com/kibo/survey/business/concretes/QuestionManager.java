@@ -38,12 +38,24 @@ public class QuestionManager implements QuestionService {
 
     @Override
     public DataResult<List<Question>> findAllBySurveyId(int surveyId) {
-        var  result = questionDao.findAllBySurveyId(surveyId);
+        var  result = questionDao.findAllBySurveyIdOrderByQuestionOrder(surveyId);
         if(result == null){
             return new ErrorDataResult<>(QuestionMessages.questionCannotBeFound);
         }
 
         return new SuccessDataResult<>(result, QuestionMessages.getQuestionByIdSuccess);
+    }
+
+    @Override
+    public Result changeQuestionName(int questionId, String newName) {
+        var result = findById(questionId);
+        if(!result.isSuccess()){
+            return new ErrorResult(result.getMessage());
+        }
+        var question = result.getData();
+        question.setContent(newName);
+        questionDao.save(question);
+        return new SuccessResult(QuestionMessages.questionUpdateSuccess);
     }
 
     @Override
@@ -61,15 +73,21 @@ public class QuestionManager implements QuestionService {
             return new ErrorResult(surveyResponse.getMessage());
         }
 
+        int questionsOrder = surveyResponse.getData().getQuestions().size() + 1;
+
         var question = Question.builder()
                 .content(requestQuestionDto.getContent())
                 .survey(surveyResponse.getData())
+                .questionOrder(questionsOrder)
                 .build();
+
+
 
         questionDao.save(question);
 
         return new SuccessResult(QuestionMessages.questionAddSuccess);
     }
+
 
     @Override
     public Result deleteQuestion(int questionId) {

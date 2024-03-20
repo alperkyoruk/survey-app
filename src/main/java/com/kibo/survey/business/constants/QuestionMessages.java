@@ -9,4 +9,5 @@ public class QuestionMessages {
     public static String questionSurveyIdCannotBeNull = "Question survey id cannot be null";
     public static String questionAddSuccess = "Question has been added";
     public static String questionDoesntExist = "Question doesn't exist";
+    public static String questionUpdateSuccess = "Question has been updated";
 }

@@ -13,4 +13,5 @@ public class RatingMessages {
     public static String ratingValueMustBeBetween1And5 = "Rating value must be between 1 and 5";
     public static Rating ratingDoesntExist;
     public static String getAverageRatingByQuestionIdSuccess;
+    public static String getAverageRatingByQuestionIdFailed = "Average rating could not be found";
 }

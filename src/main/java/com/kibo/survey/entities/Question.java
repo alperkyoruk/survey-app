@@ -25,6 +25,10 @@ public class Question {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "question_order")
+    private int questionOrder;
+
+
     @JsonIgnore
     @ManyToOne(targetEntity = Survey.class, cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name ="survey_id")

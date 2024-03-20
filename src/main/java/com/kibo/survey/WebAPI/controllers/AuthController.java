@@ -7,6 +7,8 @@ import com.kibo.survey.core.utilities.result.ErrorDataResult;
 import com.kibo.survey.core.utilities.result.Result;
 import com.kibo.survey.core.utilities.result.SuccessDataResult;
 import com.kibo.survey.entities.User;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,10 +32,21 @@ public class AuthController {
     }
 
     @PostMapping("/generateToken")
-    public DataResult<String> generateToken(@RequestParam String username, @RequestParam String password) {
+    public DataResult<String> generateToken(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         if (authentication.isAuthenticated()) {
-            return new SuccessDataResult<String>(jwtService.generateToken(username), "Token generated successfully");
+            var token = jwtService.generateToken(username);
+
+            var cookie = new Cookie("token", token);
+            cookie.setPath("/");
+            cookie.setDomain("localhost");
+            cookie.setMaxAge(31536000);
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+
+            response.addCookie(cookie);
+
+            return new SuccessDataResult<String>(token, "Token generated successfully");
         }
         return new ErrorDataResult<>("Invalid username or password");
     }

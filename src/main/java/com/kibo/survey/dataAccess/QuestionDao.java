@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface QuestionDao extends JpaRepository<Question, Integer> {
     Question findById(int id);
-    List<Question> findAllBySurveyId(int surveyId);
+    List<Question> findAllBySurveyIdOrderByQuestionOrder(int surveyId);
 
 
 }

@@ -15,4 +15,6 @@ public interface QuestionService {
 
     DataResult<List<Question>> findAllBySurveyId(int surveyId);
 
+    Result changeQuestionName(int questionId, String newName);
+
 }

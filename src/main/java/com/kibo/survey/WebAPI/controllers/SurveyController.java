@@ -1,8 +1,10 @@
 package com.kibo.survey.WebAPI.controllers;
 
 import com.kibo.survey.business.abstracts.SurveyService;
+import com.kibo.survey.core.utilities.result.DataResult;
 import com.kibo.survey.core.utilities.result.Result;
 import com.kibo.survey.entities.Survey;
+import com.kibo.survey.entities.dtos.RequestSurveyDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -48,8 +50,19 @@ public class SurveyController {
 
 
     @GetMapping("/getSurveyByLink")
-    public Result getSurveyByLink(@RequestParam String surveyLink){
+    public DataResult<Survey> getSurveyByLink(@RequestParam String surveyLink){
         return surveyService.getSurveyByLink(surveyLink);
     }
+
+    @PostMapping("/changeSurveyName")
+    public Result changeSurveyName(@RequestParam int surveyId, @RequestParam String newName){
+        return surveyService.changeSurveyName(surveyId, newName);
+    }
+
+    @GetMapping("/getSurveyQuestionsByLink")
+    public DataResult<RequestSurveyDto> getSurveyQuestionsByLink(@RequestParam String surveyLink){
+        return surveyService.getSurveyQuestionsByLink(surveyLink);
+    }
+
 
 }

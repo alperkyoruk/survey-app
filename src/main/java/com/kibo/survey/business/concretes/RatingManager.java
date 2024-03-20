@@ -82,6 +82,9 @@ public class RatingManager implements RatingService {
 
     public DataResult<Float> getAverageRatingByQuestionId(int questionId) {
        var result = ratingDao.getAvgRatingOfQuestion(questionId);
+        if (result == null){
+            return new ErrorDataResult<Float>(0f, RatingMessages.getAverageRatingByQuestionIdFailed);
+        }
 
        return new SuccessDataResult<Float>(result, RatingMessages.getAverageRatingByQuestionIdSuccess);
 

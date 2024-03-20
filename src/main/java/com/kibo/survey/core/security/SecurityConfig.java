@@ -41,6 +41,7 @@ public class SecurityConfig {
                                 .requestMatchers("/api/surveys/getSurveyByLink").permitAll()
                                 .requestMatchers("api/ratings/addRatingList").permitAll()
                                 .requestMatchers("/api/ratings/add").permitAll()
+                                .requestMatchers("/api/**").permitAll()
 
                                 .anyRequest().authenticated()
 

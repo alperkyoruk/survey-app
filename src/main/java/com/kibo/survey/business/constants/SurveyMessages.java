@@ -16,4 +16,6 @@ public class SurveyMessages {
     public static String getSurveysSuccess = "Surveys has been found";
     public static String getSurveyByIdSuccess = "Survey has been found";
     public static String getSurveyBySurveyLinkSuccess = "Survey has been found";
+    public static String changeSurveyNameSuccess = "Survey name has been changed";
+    public static String getSurveyQuestionsByLinkSuccess = "Survey questions has been found";
 }

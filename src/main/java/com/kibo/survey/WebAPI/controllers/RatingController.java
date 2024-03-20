@@ -1,6 +1,7 @@
 package com.kibo.survey.WebAPI.controllers;
 
 import com.kibo.survey.business.abstracts.RatingService;
+import com.kibo.survey.core.utilities.result.DataResult;
 import com.kibo.survey.core.utilities.result.Result;
 import com.kibo.survey.entities.dtos.RequestRatingDto;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class RatingController {
     }
 
     @GetMapping("/getAverageRatingByQuestionId")
-    public Result getAverageRatingByQuestionId(@RequestParam int questionId){
+    public DataResult<Float> getAverageRatingByQuestionId(@RequestParam int questionId){
         return ratingService.getAverageRatingByQuestionId(questionId);
     }
 
