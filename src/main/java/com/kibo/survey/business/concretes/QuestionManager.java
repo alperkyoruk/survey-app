@@ -22,9 +22,6 @@ public class QuestionManager implements QuestionService {
     @Autowired
     private SurveyService surveyService;
 
-    public QuestionManager(QuestionDao questionDao) {
-        this.questionDao = questionDao;
-    }
 
     @Override
     public DataResult<Question> findById(int id) {

@@ -20,4 +20,6 @@ public interface SurveyService{
     Result changeSurveyName(int id, String newName);
 
     DataResult<RequestSurveyDto> getSurveyQuestionsByLink(String surveyLink);
+
+    DataResult<Survey> getSurveyByQuestionId(int questionId);
 }

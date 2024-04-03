@@ -5,6 +5,7 @@
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/SurveyApplication.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/entities/dtos/RequestSurveyDto.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/concretes/SurveyManager.java
+/Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/abstracts/SessionService.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/abstracts/UserService.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/concretes/RatingManager.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/constants/RatingMessages.java
@@ -13,6 +14,7 @@
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/dataAccess/QuestionDao.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/entities/Survey.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/core/security/JwtService.java
+/Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/concretes/SessionManager.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/dataAccess/SurveyDao.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/WebAPI/controllers/AuthController.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/core/config/PasswordEncoderConfig.java
@@ -35,6 +37,9 @@
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/core/config/CorsConfig.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/core/security/SecurityConfig.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/core/utilities/result/Result.java
+/Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/constants/SessionMessages.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/abstracts/SurveyService.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/business/constants/QuestionMessages.java
+/Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/dataAccess/SessionDao.java
+/Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/entities/Session.java
 /Users/yusssss/Desktop/projects/backend/survey-app/src/main/java/com/kibo/survey/core/utilities/result/SuccessDataResult.java

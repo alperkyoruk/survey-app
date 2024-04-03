@@ -1,5 +1,6 @@
 package com.kibo.survey.business.concretes;
 
+import com.kibo.survey.business.abstracts.QuestionService;
 import com.kibo.survey.business.abstracts.SurveyService;
 import com.kibo.survey.business.constants.SurveyMessages;
 import com.kibo.survey.core.utilities.result.*;
@@ -22,13 +23,12 @@ import java.util.stream.Collectors;
 public class SurveyManager implements SurveyService {
 
 
+    @Autowired
     private SurveyDao surveyDao;
 
     @Autowired
-    public SurveyManager(SurveyDao surveyDao) {
-        this.surveyDao = surveyDao;
+    private QuestionService questionService;
 
-    }
 
     @Override
     public Result addSurvey(Survey survey) {
@@ -176,6 +176,18 @@ var result = getSurveyByLink(surveyLink);
 
 
         return new SuccessDataResult<>(requestSurveyDto, SurveyMessages.getSurveyQuestionsByLinkSuccess);
+    }
+
+    @Override
+    public DataResult<Survey> getSurveyByQuestionId(int questionId) {
+
+        var result = surveyDao.findBySurveyLinkOrderByCreatedAt(questionService.findById(questionId).getData().getSurvey().getSurveyLink());
+
+        if (result == null) {
+            return new ErrorDataResult<>(SurveyMessages.surveyDoesntExist);
+        }
+
+        return new SuccessDataResult<>(result, SurveyMessages.getSurveyByQuestionIdSuccess);
     }
 
 }

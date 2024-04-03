@@ -1,5 +1,6 @@
 package com.kibo.survey.dataAccess;
 
+import com.kibo.survey.entities.Question;
 import com.kibo.survey.entities.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,6 @@ public interface SurveyDao extends JpaRepository<Survey, Integer>{
 
     @Query("from Survey order by id")
     List<Survey> findAllOrderById();
+
+    Survey findSurveyByQuestions(List<Question> questions);
 }

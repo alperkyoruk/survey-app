@@ -3,16 +3,17 @@ package com.kibo.survey.WebAPI.controllers;
 import com.kibo.survey.business.abstracts.QuestionService;
 import com.kibo.survey.core.utilities.result.Result;
 import com.kibo.survey.entities.dtos.RequestQuestionDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
+
+    @Autowired
     private QuestionService questionService;
 
-    public QuestionController(QuestionService questionService){
-        this.questionService = questionService;
-    }
+
 
     @PostMapping("/add")
     public Result addQuestion(@RequestBody RequestQuestionDto requestQuestionDto){
