@@ -88,7 +88,7 @@ public class SurveyController {
         if(sessionResult.getData() != null){
             var cookie = new Cookie("session", sessionResult.getData());
             cookie.setPath("/");
-            cookie.setDomain("localhost");
+            cookie.setDomain("survey-frontend-opal.vercel.app");
             cookie.setMaxAge(31536000);
             cookie.setHttpOnly(true);
             cookie.setSecure(true);
