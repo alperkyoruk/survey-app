@@ -94,7 +94,7 @@ public class QuestionManager implements QuestionService {
         }
 
         questionDao.delete(question);
-        return null;
+        return new SuccessResult(QuestionMessages.questionDeleteSuccess);
     }
 
     @Override

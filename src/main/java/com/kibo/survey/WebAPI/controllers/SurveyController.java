@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/surveys")
 public class SurveyController {
+
     @Autowired
     private SurveyService surveyService;
 
@@ -32,7 +33,7 @@ public class SurveyController {
         return surveyService.updateSurvey(survey);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result deleteSurvey(@RequestParam int id){
         return surveyService.deleteSurvey(id);
     }
@@ -87,7 +88,7 @@ public class SurveyController {
         if(sessionResult.getData() != null){
             var cookie = new Cookie("session", sessionResult.getData());
             cookie.setPath("/");
-            cookie.setDomain("survey-frontend-opal.vercel.app");
+            cookie.setDomain("localhost");
             cookie.setMaxAge(31536000);
             cookie.setHttpOnly(true);
             cookie.setSecure(true);

@@ -40,8 +40,7 @@ public class RatingController {
     public Result addRatingList(@RequestBody List<RequestRatingDto> requestRatingDtos, HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
 
-        var surveyLink = surveyService.getSurveyByQuestionId(requestRatingDtos.get(0).getQuestionId());
-
+        var surveyLink = surveyService.getSurveyByQuestionId(requestRatingDtos.stream().findFirst().get().getQuestionId());
 
 
         if (cookies != null) {

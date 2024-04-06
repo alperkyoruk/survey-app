@@ -31,11 +31,12 @@ public class AuthController {
 
 
 
-    @PostMapping("/generateToken")
-    public DataResult<String> generateToken(@RequestParam String username, @RequestParam String password) {
+    @GetMapping("/generateToken")
+    public DataResult<String> generateToken(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         if (authentication.isAuthenticated()) {
             var token = jwtService.generateToken(username);
+
             return new SuccessDataResult<String>(token, "Token generated successfully");
         }
         return new ErrorDataResult<>("Invalid username or password");

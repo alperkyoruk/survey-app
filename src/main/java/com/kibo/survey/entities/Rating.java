@@ -28,7 +28,7 @@ public class Rating {
     private Date submittedAt;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "question_id")
     private Question question;
 

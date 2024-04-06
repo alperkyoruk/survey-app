@@ -10,4 +10,5 @@ public class QuestionMessages {
     public static String questionAddSuccess = "Question has been added";
     public static String questionDoesntExist = "Question doesn't exist";
     public static String questionUpdateSuccess = "Question has been updated";
+    public static String questionDeleteSuccess = "Question has been deleted";
 }

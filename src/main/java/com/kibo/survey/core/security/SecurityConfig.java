@@ -4,6 +4,7 @@ import com.kibo.survey.business.abstracts.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -37,11 +38,19 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(x ->
                         x
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                                .requestMatchers("/api/surveys/checkIfUserSubmittedSurveyBefore").permitAll()
+                                .requestMatchers("/api/surveys/getSurveyQuestionsByLink").permitAll()
+                                .requestMatchers("/api/surveys/**").hasAnyRole("ADMIN")
+
+                                .requestMatchers("/api/ratings/addRatingList").permitAll()
+                                .requestMatchers("/api/ratings/**").hasAnyRole("ADMIN")
+
+                                .requestMatchers("/api/questions/**").hasAnyRole("ADMIN")
+
+
                                 .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/api/surveys/getSurveyByLink").permitAll()
-                                .requestMatchers("api/ratings/addRatingList").permitAll()
-                                .requestMatchers("/api/ratings/add").permitAll()
-                                .requestMatchers("/api/**").permitAll()
 
                                 .anyRequest().authenticated()
 

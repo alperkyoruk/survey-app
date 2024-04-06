@@ -20,7 +20,7 @@ public class QuestionController {
         return questionService.addQuestion(requestQuestionDto);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Result deleteQuestion(@RequestParam int id){
         return questionService.deleteQuestion(id);
     }
