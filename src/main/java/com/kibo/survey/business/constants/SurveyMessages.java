@@ -19,4 +19,5 @@ public class SurveyMessages {
     public static String changeSurveyNameSuccess = "Survey name has been changed";
     public static String getSurveyQuestionsByLinkSuccess = "Survey questions has been found";
     public static String getSurveyByQuestionIdSuccess = "Survey has been found";
+    public static String surveyUpdateSuccess = "Survey has been updated";
 }

@@ -22,7 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
@@ -49,20 +48,15 @@ public class SecurityConfig {
 
                                 .requestMatchers("/api/questions/**").hasAnyRole("ADMIN")
 
-
                                 .requestMatchers("/api/auth/**").permitAll()
 
                                 .anyRequest().authenticated()
-
                 )
                 .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
-
-
     }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -71,7 +65,6 @@ public class SecurityConfig {
         return authenticationProvider;
 
     }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

@@ -21,51 +21,23 @@ import java.util.stream.Collectors;
 
 @Service
 public class SurveyManager implements SurveyService {
-
-
     @Autowired
     private SurveyDao surveyDao;
 
     @Autowired
     private QuestionService questionService;
 
-
     @Override
     public Result addSurvey(Survey survey) {
         if(survey.getName().isEmpty()) {
             return new ErrorResult(SurveyMessages.surveyNameCannotBeNull);
         }
-
-
         survey.setSurveyLink(generateSurveyLink());
         survey.setActive(true);
         survey.setCreatedAt(new Date());
 
         surveyDao.save(survey);
         return new SuccessResult(SurveyMessages.surveyAddSuccess);
-    }
-
-    @Override
-    public Result updateSurvey(Survey survey) {
-        var result = getSurveyById(survey.getId());
-        if(!result.isSuccess()){
-            return new ErrorResult(result.getMessage());
-        }
-
-        var surveyToUpdate = result.getData();
-        if(survey.getName().isEmpty()){
-            return new ErrorResult(SurveyMessages.surveyNameCannotBeNull);
-        }
-        if(survey.getQuestions().isEmpty()){
-            return new ErrorResult(SurveyMessages.surveyQuestionsCannotBeNull);
-        }
-
-        surveyToUpdate.setName(survey.getName());
-        surveyToUpdate.setQuestions(survey.getQuestions());
-        surveyToUpdate.setActive(survey.isActive());
-
-        surveyDao.save(surveyToUpdate);
-        return null;
     }
 
     @Override
@@ -76,16 +48,13 @@ public class SurveyManager implements SurveyService {
         }
         var survey = result.getData();
         surveyDao.delete(survey);
-
-
         return new SuccessResult(SurveyMessages.surveyDeleteSuccess);
     }
-
     @Override
     public DataResult<Survey> getSurveyById(int id) {
         var result = surveyDao.findById(id);
         if(result == null){
-            return new SuccessDataResult<>(SurveyMessages.surveyDoesntExist);
+            return new ErrorDataResult<>(SurveyMessages.surveyDoesntExist);
         }
         return new SuccessDataResult<>(result, SurveyMessages.getSurveyByIdSuccess);
     }
@@ -98,6 +67,27 @@ public class SurveyManager implements SurveyService {
         }
 
         return new SuccessDataResult<List<Survey>>(result, SurveyMessages.getActiveSurveySuccess);
+    }
+
+    @Override
+    public Result updateSurvey(Survey survey) {
+        var result = getSurveyById(survey.getId());
+        if(!result.isSuccess()){
+            return new ErrorResult(result.getMessage());
+        }
+        var surveyToUpdate = result.getData();
+        if(survey.getName().isEmpty()){
+            return new ErrorResult(SurveyMessages.surveyNameCannotBeNull);
+        }
+        if(survey.getQuestions().isEmpty()){
+            return new ErrorResult(SurveyMessages.surveyQuestionsCannotBeNull);
+        }
+        surveyToUpdate.setName(survey.getName());
+        surveyToUpdate.setQuestions(survey.getQuestions());
+        surveyToUpdate.setActive(survey.isActive());
+
+        surveyDao.save(surveyToUpdate);
+        return new SuccessResult(SurveyMessages.surveyUpdateSuccess);
     }
 
     @Override
