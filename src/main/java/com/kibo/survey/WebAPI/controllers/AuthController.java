@@ -31,7 +31,7 @@ public class AuthController {
 
 
 
-    @GetMapping("/generateToken")
+    @PostMapping("/generateToken")
     public DataResult<String> generateToken(@RequestParam String username, @RequestParam String password, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         if (authentication.isAuthenticated()) {

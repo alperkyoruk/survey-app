@@ -14,4 +14,5 @@ public class RatingMessages {
     public static Rating ratingDoesntExist;
     public static String getAverageRatingByQuestionIdSuccess;
     public static String getAverageRatingByQuestionIdFailed = "Average rating could not be found";
+    public static String getAllRatingsSuccess = "All ratings has been found";
 }

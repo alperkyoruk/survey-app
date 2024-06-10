@@ -28,7 +28,7 @@ public class RatingManager implements RatingService {
     public DataResult<List<Rating>> getAllRatings() {
         var result = ratingDao.findAll();
 
-        return new SuccessDataResult<List<Rating>>(result, "mesaj");
+        return new SuccessDataResult<List<Rating>>(result, RatingMessages.getAllRatingsSuccess);
     }
 
     @Override
